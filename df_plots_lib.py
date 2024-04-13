@@ -26,7 +26,7 @@ def plot_2d_scatter(df,col,groups,x_axis,y_axis,**kwarg):
     ax.tick_params(axis='x', labelsize=16)
     ax.tick_params(axis='y', labelsize=16)
     [x.set_linewidth(2.0) for x in ax.spines.values()]
-    #plt.savefig('scatter_plot_2d.png',dpi=300,bbox_inches='tight')
+    plt.savefig('scatter_plot_2d.png',dpi=300,bbox_inches='tight')
     plt.show()
 
 def plot_3d_scatter(df,col,groups,x_axis,y_axis,z_axis,**kwarg):
@@ -52,13 +52,13 @@ def plot_3d_scatter(df,col,groups,x_axis,y_axis,z_axis,**kwarg):
     ax.tick_params(axis='y', labelsize=16)
     ax.tick_params(axis='z', labelsize=16)
     [x.set_linewidth(2.0) for x in ax.spines.values()]
-    #plt.savefig('scatter_plot_2d.png',dpi=300,bbox_inches='tight')
+    plt.savefig('scatter_plot_3d.png',dpi=300,bbox_inches='tight')
     plt.show()
 
 def plot_boxplot(df,x_axis,y_axis,groups):
     grped_bplot = sns.catplot(x=x_axis, y=y_axis, hue=groups, kind="box", data=df, legend=False, height=6, aspect=1.5)
     grped_bplot = sns.stripplot(x=x_axis, y=y_axis, hue=groups, jitter=True,
-                                 dodge=True, marker='o', palette="Set2", alpha=0.5, data=df)
+                                 dodge=True, marker='o', palette="Set1", alpha=0.5, data=df)
     handles, labels = grped_bplot.get_legend_handles_labels()
     #grped_bplot.get_legend().remove()
     num = len(df[groups].unique())
@@ -68,6 +68,7 @@ def plot_boxplot(df,x_axis,y_axis,groups):
     grped_bplot.tick_params(axis='x', labelsize=16)
     grped_bplot.tick_params(axis='y', labelsize=16)
     [x.set_linewidth(2.0) for x in grped_bplot.spines.values()]
+    plt.savefig('boxplot.png',dpi=300,bbox_inches='tight')
 
 
 
@@ -85,8 +86,8 @@ def main():
     groups = ['Grass','Fire','Water']
     colors = ['green', 'red', 'blue']
     kwarg = {'colors': colors, 'alpha': 0.5, 'label_size':40}
-    #plot_2d_scatter(df,col,groups,'Attack','Defense',**kwarg)
-    #plot_3d_scatter(df,col,groups,'Attack','Defense','HP',**kwarg)
+    plot_2d_scatter(df,col,groups,'Attack','Defense',**kwarg)
+    plot_3d_scatter(df,col,groups,'Attack','Defense','HP',**kwarg)
 
     categories = ['Attack','Defense']
     df = df[(df['Type_1']== 'Grass') | (df['Type_1']== 'Fire')]
